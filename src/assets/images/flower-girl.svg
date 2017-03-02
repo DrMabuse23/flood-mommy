@@ -1,5 +1,6 @@
-# flood-mommy [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]
-> 
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -83,15 +84,3 @@
        id="path2900" />
   </g>
 </svg>
-
-## License
-
- © [DrMabuse]()
-[npm-image]: https://badge.fury.io/js/flood-mommy.svg
-[npm-url]: https://npmjs.org/package/flood-mommy
-[travis-image]: https://travis-ci.org/DrMabuse23/flood-mommy.svg?branch=master
-[travis-url]: https://travis-ci.org/DrMabuse23/flood-mommy
-[daviddm-image]: https://david-dm.org/DrMabuse23/flood-mommy.svg?theme=shields.io
-[daviddm-url]: https://david-dm.org/DrMabuse23/flood-mommy
-[coveralls-image]: https://coveralls.io/repos/DrMabuse23/flood-mommy/badge.svg
-[coveralls-url]: https://coveralls.io/r/DrMabuse23/flood-mommy
