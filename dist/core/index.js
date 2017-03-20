@@ -1,4 +1,0 @@
-"use strict";
-var FloodRunner_1 = require('./FloodRunner');
-exports.FloodRunner = FloodRunner_1.FloodRunner;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi9zcmMvY29yZS9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsNEJBQTBCLGVBQWUsQ0FBQztBQUFsQyxnREFBa0MifQ==

@@ -8,9 +8,9 @@
       "type": "node",
       "request": "launch",
       "name": "Electron Main",
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron",
+      "runtimeExecutable": "${workspaceRoot}/desktop/node_modules/.bin/electron",
       "windows": {
-        "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/electron.cmd"
+        "runtimeExecutable": "${workspaceRoot}/desktop/node_modules/.bin/electron.cmd"
       },
       "program": "${workspaceRoot}/main.js",
       "protocol": "legacy"
@@ -23,7 +23,7 @@
       "runtimeArgs": [
         "--debug=5858"
       ],
-      "program": "${workspaceRoot}/dist/core/FloodRunner.js",
+      "program": "${workspaceRoot}/dist/flood-mommy.js",
       "restart": true,
       "port": 5858,
       "console": "integratedTerminal",

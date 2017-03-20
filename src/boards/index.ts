@@ -1,1 +1,1 @@
-export {Mega2560} from './Mega2560Uno';
+export { Mega2560Uno } from './Mega2560Uno';
