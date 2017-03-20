@@ -29,6 +29,7 @@ var Watcher = (function () {
         }
         // console.log(path, this.options);
         this.watcher = chokidar.watch(path, this.options);
+        console.log(emoji.get('eyes') + "  start watcher on " + path);
     }
     Watcher.prototype.clearEvent = function (type) {
         var ev = this.events[type] || null;
@@ -37,53 +38,57 @@ var Watcher = (function () {
         }
     };
     Watcher.prototype.addEvent = function (type) {
-        var _this = this;
-        this.events[type] = new rxjs_1.Observable(function (ob) {
-            _this.watcher.on(type, function () {
-                var params = [];
-                for (var _i = 0; _i < arguments.length; _i++) {
-                    params[_i - 0] = arguments[_i];
-                }
-                ob.next.apply(ob, params);
-            });
-        });
-        // this.events[type] = Observable.fromEvent(<any>this.watcher, type);
+        this.events[type] = rxjs_1.Observable.fromEvent(this.watcher, type);
         return this.events[type];
     };
     Watcher.prototype.deConstruct = function () {
+        console.log(emoji.get('eyes') + "  close watcher.");
         this.watcher.close();
     };
     return Watcher;
 }());
+/**
+ * @export
+ * @class FloodMommyBundler
+ */
 var FloodMommyBundler = (function () {
     function FloodMommyBundler() {
         var _this = this;
         this.options = {
             homeDir: 'src/',
-            tsConfig: 'tsconfig.json',
-            sourcemaps: true,
-            outFile: './dist/flood-mommy.js'
+            tsConfig: './tsconfig.json',
+            outFile: './dist/flood-mommy.js',
+            plugins: []
         };
         this.bundleTypeScript().then(function () { return _this.watcher(); });
     }
+    /**
+     * @param {string} [path='>**\/*.ts']
+     * @returns
+     *
+     * @memberOf FloodMommyBundler
+     */
     FloodMommyBundler.prototype.bundleTypeScript = function (path) {
         if (path === void 0) { path = '>**/*.ts'; }
         return fuse_box_1.FuseBox
             .init(this.options)
             .bundle(path);
     };
+    /**
+     * @memberOf FloodMommyBundler
+     */
     FloodMommyBundler.prototype.watcher = function () {
         var _this = this;
         var path = __dirname + "/" + this.options.homeDir + "**/*.ts";
         var watcher = new Watcher(path);
         watcher.addEvent('change')
-            .do(function (_path) { return console.log(emoji.get('v') + " changed " + _path.toString()); })
+            .do(function (_path) { return console.log(emoji.get('v') + "  changed " + _path.toString()); })
             .throttleTime(200)
             .subscribe(function (res) {
-            console.log(emoji.get('writing_hand') + " write");
+            console.log(emoji.get('writing_hand') + "  write");
             _this.bundleTypeScript()
-                .then(function () { return console.log(emoji.get('100') + " written"); });
-        }, function (e) { return console.error(emoji.get('skull_and_crossbones') + " oh sh..", e); });
+                .then(function () { return console.log(emoji.get('100') + "  written"); });
+        }, function (e) { return console.error(emoji.get('skull_and_crossbones') + "  oh sh..", e); });
     };
     return FloodMommyBundler;
 }());

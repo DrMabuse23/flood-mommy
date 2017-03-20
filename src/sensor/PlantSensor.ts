@@ -1,6 +1,9 @@
-import {Observable, TimeInterval} from '@reactivex/rxjs';
-import {Sensor} from 'johnny-five';
-
+import { Observable, TimeInterval } from '@reactivex/rxjs';
+import { Sensor } from 'johnny-five';
+/**
+ * @export
+ * @class PlantSensor
+ */
 export class PlantSensor {
   private sensor: Sensor;
   constructor(pin = 'A0') {
@@ -11,9 +14,6 @@ export class PlantSensor {
     const reader = Observable.fromEvent(<any>this.sensor, 'data');
     let oldsensor: any = null;
     reader.subscribe((value: any) => {
-      // if (value !== oldsensor && value > 0) {
-      //   console.log(value);
-      // }
       if (value >= 0) {
         oldsensor = value;
       }
@@ -22,5 +22,5 @@ export class PlantSensor {
       .timeInterval()
       .distinctUntilChanged()
       .filter(() => oldsensor >= 0);
-    }
+  }
 }

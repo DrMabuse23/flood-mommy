@@ -25,6 +25,7 @@
     "chokidar": "^1.6.1",
     "es6-shim": "^0.35.3",
     "node-emoji": "^1.5.1",
-    "typescript": "^2.2.1"
+    "typescript": "^2.2.1",
+    "uglify-js": "^2.8.14"
   }
 }
