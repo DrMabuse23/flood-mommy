@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "inlineSourceMap": true,
+    "rootDir": "src",
+    "outDir": "build",
+    "lib": [
+      "es5",
+      "es6",
+      "es7",
+      "dom"
+    ],
+    "types": [
+      "inferno"
+    ],
+    "jsx": "react",
+    "jsxFactory": "Inferno.createElement",
+    "pretty": true,
+    "stripInternal": true,
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "suppressImplicitAnyIndexErrors": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": false,
+    "forceConsistentCasingInFileNames": true,
+    "newLine": "LF"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.js",
+    "src/**/*.jsx"
+  ],
+  "exclude": [
+    "src/**/*.d.ts"
+  ]
+}
