@@ -5,3 +5,5 @@ coverage
 /desktop
 symbols.json
 /.vscode/symbols.json
+dist
+desktop/build/**/*.js

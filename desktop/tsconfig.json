@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
+    "autoImport":"true",
+    "target": "es6",
+    "module": "es6",
     "moduleResolution": "node",
     "allowJs": false,
     "allowSyntheticDefaultImports": true,
@@ -9,6 +10,7 @@
     "inlineSourceMap": true,
     "rootDir": "src",
     "outDir": "build",
+
     "lib": [
       "es5",
       "es6",
