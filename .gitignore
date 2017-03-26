@@ -4,3 +4,4 @@ coverage
 /.fusebox
 /desktop
 symbols.json
+/.vscode/symbols.json
