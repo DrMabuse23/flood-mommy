@@ -12,7 +12,7 @@
       "windows": {
         "runtimeExecutable": "${workspaceRoot}/desktop/node_modules/.bin/electron.cmd"
       },
-      "program": "${workspaceRoot}/main.js",
+      "program": "${workspaceRoot}/desktop/main.js",
       "protocol": "legacy"
     },
     {

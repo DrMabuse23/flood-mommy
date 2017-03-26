@@ -3,16 +3,27 @@ FuseBox.pkg("default", {}, function(___scope___){
 ___scope___.file("boards/Mega2560Uno.js", function(exports, require, module, __filename, __dirname){
 
 "use strict";
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 Object.defineProperty(exports, "__esModule", { value: true });
-const johnny_five_1 = require("johnny-five");
-class Mega2560Uno extends johnny_five_1.Board {
-    constructor(option) {
-        super(option);
-        debugger;
+var johnny_five_1 = require("johnny-five");
+var Mega2560Uno = (function (_super) {
+    __extends(Mega2560Uno, _super);
+    function Mega2560Uno(option) {
+        return _super.call(this, option) || this;
     }
-}
+    return Mega2560Uno;
+}(johnny_five_1.Board));
 exports.Mega2560Uno = Mega2560Uno;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWVnYTI1NjBVbm8uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWxlOi8vLy9Vc2Vycy9wYXNjYWxicmV3aW5nL2h0ZG9jcy9mbG9vZC1tb21teS9zcmMvYm9hcmRzL01lZ2EyNTYwVW5vLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsNkNBQWtEO0FBRWxELGlCQUF5QixTQUFRLG1CQUFLO0lBQ3BDLFlBQVksTUFBcUI7UUFDL0IsS0FBSyxDQUFDLE1BQU0sQ0FBQyxDQUFDO1FBQ2QsUUFBUSxDQUFDO0lBQ1gsQ0FBQztDQUNGO0FBTEQsa0NBS0MifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiTWVnYTI1NjBVbm8uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWxlOi8vLy9Vc2Vycy9wYXNjYWxicmV3aW5nL2h0ZG9jcy9mbG9vZC1tb21teS9zcmMvYm9hcmRzL01lZ2EyNTYwVW5vLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7OztBQUFBLDJDQUFrRDtBQUVsRDtJQUFpQywrQkFBSztJQUNwQyxxQkFBWSxNQUFxQjtlQUMvQixrQkFBTSxNQUFNLENBQUM7SUFDZixDQUFDO0lBQ0gsa0JBQUM7QUFBRCxDQUFDLEFBSkQsQ0FBaUMsbUJBQUssR0FJckM7QUFKWSxrQ0FBVyJ9
 });
 ___scope___.file("boards/index.js", function(exports, require, module, __filename, __dirname){
 
@@ -29,29 +40,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @module Core
  */
-const boards_1 = require("../boards");
-const johnny_five_1 = require("johnny-five");
-const rxjs_1 = require("@reactivex/rxjs");
+var boards_1 = require("../boards");
+var johnny_five_1 = require("johnny-five");
+var rxjs_1 = require("@reactivex/rxjs");
 /**
  * @export
  * @class FloodRunner
  */
-class FloodRunner {
-    constructor() {
+var FloodRunner = (function () {
+    function FloodRunner() {
         this._board = new boards_1.Mega2560Uno();
         this._board.on('ready', this.boardReady.bind(this));
         this._board.on('connect', this.connected.bind(this));
         this._board.on('error', this.error.bind(this));
     }
-    boardReady(event) {
+    FloodRunner.prototype.boardReady = function (event) {
+        debugger;
         // const led13 = new Led(13);
-        const led11 = new johnny_five_1.Led(13);
+        var led11 = new johnny_five_1.Led(13);
         console.log('ready', event);
         var sensor = new johnny_five_1.Sensor("A0");
-        let oldsensor = null;
+        var oldsensor = null;
         // When the sensor value changes, log the value
-        const reader = rxjs_1.Observable.fromEvent(sensor, 'data');
-        reader.subscribe((value) => {
+        var reader = rxjs_1.Observable.fromEvent(sensor, 'data');
+        reader.subscribe(function (value) {
             // if (value !== oldsensor && value > 0) {
             //   console.log(value);
             // }
@@ -59,13 +71,13 @@ class FloodRunner {
                 oldsensor = value;
             }
         });
-        rxjs_1.Observable.interval(3000).timeInterval().distinctUntilChanged().filter(() => oldsensor >= 0).subscribe(() => {
+        rxjs_1.Observable.interval(3000).timeInterval().distinctUntilChanged().filter(function () { return oldsensor >= 0; }).subscribe(function () {
             console.log(oldsensor);
             led11.on();
             led11.pulse(100);
             led11.stop(200);
             led11.off();
-        }, e => e, () => { });
+        }, function (e) { return e; }, function () { });
         // sensor.on("data", (value: any) => {
         //   //debugger;
         //   if (value !== oldsensor && value > 0) {
@@ -90,17 +102,18 @@ class FloodRunner {
         //     (e: any) => console.error(e),
         //     () => loop.subscribe()
         //   );
-    }
-    connected(event) {
+    };
+    FloodRunner.prototype.connected = function (event) {
         console.log('connected', event);
-    }
-    error(e) {
+    };
+    FloodRunner.prototype.error = function (e) {
         console.error(e);
-    }
-}
+    };
+    return FloodRunner;
+}());
 exports.FloodRunner = FloodRunner;
-const runner = new FloodRunner();
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRmxvb2RSdW5uZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWxlOi8vLy9Vc2Vycy9wYXNjYWxicmV3aW5nL2h0ZG9jcy9mbG9vZC1tb21teS9zcmMvY29yZS9GbG9vZFJ1bm5lci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBOztHQUVHO0FBQ0gsc0NBQXdDO0FBQ3hDLDZDQUF3RDtBQUN4RCwwQ0FBNkM7QUFHN0M7OztHQUdHO0FBQ0g7SUFHRTtRQUNFLElBQUksQ0FBQyxNQUFNLEdBQUcsSUFBSSxvQkFBVyxFQUFFLENBQUM7UUFDaEMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7UUFDcEQsSUFBSSxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7UUFDckQsSUFBSSxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7SUFDakQsQ0FBQztJQUVELFVBQVUsQ0FBQyxLQUFVO1FBQ25CLDZCQUE2QjtRQUM3QixNQUFNLEtBQUssR0FBRyxJQUFJLGlCQUFHLENBQUMsRUFBRSxDQUFDLENBQUM7UUFDMUIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxPQUFPLEVBQUUsS0FBSyxDQUFDLENBQUM7UUFDNUIsSUFBSSxNQUFNLEdBQUcsSUFBSSxvQkFBTSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzlCLElBQUksU0FBUyxHQUFRLElBQUksQ0FBQztRQUMxQiwrQ0FBK0M7UUFDL0MsTUFBTSxNQUFNLEdBQUcsaUJBQVUsQ0FBQyxTQUFTLENBQU0sTUFBTSxFQUFFLE1BQU0sQ0FBQyxDQUFDO1FBQ3pELE1BQU0sQ0FBQyxTQUFTLENBQUMsQ0FBQyxLQUFVO1lBQzFCLDBDQUEwQztZQUMxQyx3QkFBd0I7WUFDeEIsSUFBSTtZQUNKLEVBQUUsQ0FBQyxDQUFDLEtBQUssSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDO2dCQUNmLFNBQVMsR0FBRyxLQUFLLENBQUM7WUFDcEIsQ0FBQztRQUNILENBQUMsQ0FBQyxDQUFDO1FBQ0gsaUJBQVUsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUMsWUFBWSxFQUFFLENBQUMsb0JBQW9CLEVBQUUsQ0FBQyxNQUFNLENBQUMsTUFBTSxTQUFTLElBQUksQ0FBQyxDQUFDLENBQUMsU0FBUyxDQUNwRztZQUNFLE9BQU8sQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7WUFDdkIsS0FBSyxDQUFDLEVBQUUsRUFBRSxDQUFDO1lBQ1gsS0FBSyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUNqQixLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQ2hCLEtBQUssQ0FBQyxHQUFHLEVBQUUsQ0FBQztRQUNkLENBQUMsRUFDRCxDQUFDLElBQUksQ0FBQyxFQUNOLFFBQVEsQ0FBQyxDQUNWLENBQUM7UUFDRixzQ0FBc0M7UUFDdEMsZ0JBQWdCO1FBQ2hCLDRDQUE0QztRQUM1QywwQkFBMEI7UUFDMUIsTUFBTTtRQUNOLHNCQUFzQjtRQUN0Qix5QkFBeUI7UUFDekIsTUFBTTtRQUVOLGdCQUFnQjtRQUNoQixZQUFZO1FBQ1osTUFBTTtRQUVOLDRCQUE0QjtRQUM1QiwrQkFBK0I7UUFDL0IsbUJBQW1CO1FBQ25CLDhCQUE4QjtRQUM5QixtQ0FBbUM7UUFDbkMsZ0NBQWdDO1FBQ2hDLGFBQWE7UUFDYixhQUFhO1FBRWIsb0JBQW9CO1FBQ3BCLHdDQUF3QztRQUN4QyxvQ0FBb0M7UUFDcEMsNkJBQTZCO1FBQzdCLE9BQU87SUFDVCxDQUFDO0lBRUQsU0FBUyxDQUFDLEtBQVU7UUFDbEIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxXQUFXLEVBQUUsS0FBSyxDQUFDLENBQUM7SUFDbEMsQ0FBQztJQUVELEtBQUssQ0FBQyxDQUFRO1FBQ1osT0FBTyxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsQ0FBQztJQUNuQixDQUFDO0NBQ0Y7QUF6RUQsa0NBeUVDO0FBRUQsTUFBTSxNQUFNLEdBQUcsSUFBSSxXQUFXLEVBQUUsQ0FBQyJ9
+var runner = new FloodRunner();
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiRmxvb2RSdW5uZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWxlOi8vLy9Vc2Vycy9wYXNjYWxicmV3aW5nL2h0ZG9jcy9mbG9vZC1tb21teS9zcmMvY29yZS9GbG9vZFJ1bm5lci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOztBQUFBOztHQUVHO0FBQ0gsb0NBQXdDO0FBQ3hDLDJDQUF3RDtBQUN4RCx3Q0FBNkM7QUFHN0M7OztHQUdHO0FBQ0g7SUFHRTtRQUNFLElBQUksQ0FBQyxNQUFNLEdBQUcsSUFBSSxvQkFBVyxFQUFFLENBQUM7UUFDaEMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQyxVQUFVLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7UUFDcEQsSUFBSSxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsU0FBUyxFQUFFLElBQUksQ0FBQyxTQUFTLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7UUFDckQsSUFBSSxDQUFDLE1BQU0sQ0FBQyxFQUFFLENBQUMsT0FBTyxFQUFFLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQyxDQUFDLENBQUM7SUFDakQsQ0FBQztJQUVELGdDQUFVLEdBQVYsVUFBVyxLQUFVO1FBQ25CLFFBQVEsQ0FBQztRQUNULDZCQUE2QjtRQUM3QixJQUFNLEtBQUssR0FBRyxJQUFJLGlCQUFHLENBQUMsRUFBRSxDQUFDLENBQUM7UUFDMUIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxPQUFPLEVBQUUsS0FBSyxDQUFDLENBQUM7UUFDNUIsSUFBSSxNQUFNLEdBQUcsSUFBSSxvQkFBTSxDQUFDLElBQUksQ0FBQyxDQUFDO1FBQzlCLElBQUksU0FBUyxHQUFRLElBQUksQ0FBQztRQUMxQiwrQ0FBK0M7UUFDL0MsSUFBTSxNQUFNLEdBQUcsaUJBQVUsQ0FBQyxTQUFTLENBQU0sTUFBTSxFQUFFLE1BQU0sQ0FBQyxDQUFDO1FBQ3pELE1BQU0sQ0FBQyxTQUFTLENBQUMsVUFBQyxLQUFVO1lBQzFCLDBDQUEwQztZQUMxQyx3QkFBd0I7WUFDeEIsSUFBSTtZQUNKLEVBQUUsQ0FBQyxDQUFDLEtBQUssSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDO2dCQUNmLFNBQVMsR0FBRyxLQUFLLENBQUM7WUFDcEIsQ0FBQztRQUNILENBQUMsQ0FBQyxDQUFDO1FBQ0gsaUJBQVUsQ0FBQyxRQUFRLENBQUMsSUFBSSxDQUFDLENBQUMsWUFBWSxFQUFFLENBQUMsb0JBQW9CLEVBQUUsQ0FBQyxNQUFNLENBQUMsY0FBTSxPQUFBLFNBQVMsSUFBSSxDQUFDLEVBQWQsQ0FBYyxDQUFDLENBQUMsU0FBUyxDQUNwRztZQUNFLE9BQU8sQ0FBQyxHQUFHLENBQUMsU0FBUyxDQUFDLENBQUM7WUFDdkIsS0FBSyxDQUFDLEVBQUUsRUFBRSxDQUFDO1lBQ1gsS0FBSyxDQUFDLEtBQUssQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUNqQixLQUFLLENBQUMsSUFBSSxDQUFDLEdBQUcsQ0FBQyxDQUFDO1lBQ2hCLEtBQUssQ0FBQyxHQUFHLEVBQUUsQ0FBQztRQUNkLENBQUMsRUFDRCxVQUFBLENBQUMsSUFBSSxPQUFBLENBQUMsRUFBRCxDQUFDLEVBQ04sY0FBUSxDQUFDLENBQ1YsQ0FBQztRQUNGLHNDQUFzQztRQUN0QyxnQkFBZ0I7UUFDaEIsNENBQTRDO1FBQzVDLDBCQUEwQjtRQUMxQixNQUFNO1FBQ04sc0JBQXNCO1FBQ3RCLHlCQUF5QjtRQUN6QixNQUFNO1FBRU4sZ0JBQWdCO1FBQ2hCLFlBQVk7UUFDWixNQUFNO1FBRU4sNEJBQTRCO1FBQzVCLCtCQUErQjtRQUMvQixtQkFBbUI7UUFDbkIsOEJBQThCO1FBQzlCLG1DQUFtQztRQUNuQyxnQ0FBZ0M7UUFDaEMsYUFBYTtRQUNiLGFBQWE7UUFFYixvQkFBb0I7UUFDcEIsd0NBQXdDO1FBQ3hDLG9DQUFvQztRQUNwQyw2QkFBNkI7UUFDN0IsT0FBTztJQUNULENBQUM7SUFFRCwrQkFBUyxHQUFULFVBQVUsS0FBVTtRQUNsQixPQUFPLENBQUMsR0FBRyxDQUFDLFdBQVcsRUFBRSxLQUFLLENBQUMsQ0FBQztJQUNsQyxDQUFDO0lBRUQsMkJBQUssR0FBTCxVQUFNLENBQVE7UUFDWixPQUFPLENBQUMsS0FBSyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBQ25CLENBQUM7SUFDSCxrQkFBQztBQUFELENBQUMsQUExRUQsSUEwRUM7QUExRVksa0NBQVc7QUE0RXhCLElBQU0sTUFBTSxHQUFHLElBQUksV0FBVyxFQUFFLENBQUMifQ==
 });
 ___scope___.file("core/index.js", function(exports, require, module, __filename, __dirname){
 
@@ -142,7 +155,7 @@ exports.PlantSensor = PlantSensor;
 //# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiUGxhbnRTZW5zb3IuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWxlOi8vLy9Vc2Vycy9wYXNjYWxicmV3aW5nL2h0ZG9jcy9mbG9vZC1tb21teS9zcmMvc2Vuc29yL1BsYW50U2Vuc29yLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUEsMENBQTJEO0FBQzNELDZDQUFxQztBQUNyQzs7O0dBR0c7QUFDSDtJQUVFLFlBQVksR0FBRyxHQUFHLElBQUk7UUFDcEIsSUFBSSxDQUFDLE1BQU0sR0FBRyxJQUFJLG9CQUFNLENBQUMsR0FBRyxDQUFDLENBQUM7SUFDaEMsQ0FBQztJQUVELElBQUk7UUFDRixNQUFNLE1BQU0sR0FBRyxpQkFBVSxDQUFDLFNBQVMsQ0FBTSxJQUFJLENBQUMsTUFBTSxFQUFFLE1BQU0sQ0FBQyxDQUFDO1FBQzlELElBQUksU0FBUyxHQUFRLElBQUksQ0FBQztRQUMxQixNQUFNLENBQUMsU0FBUyxDQUFDLENBQUMsS0FBVTtZQUMxQixFQUFFLENBQUMsQ0FBQyxLQUFLLElBQUksQ0FBQyxDQUFDLENBQUMsQ0FBQztnQkFDZixTQUFTLEdBQUcsS0FBSyxDQUFDO1lBQ3BCLENBQUM7UUFDSCxDQUFDLENBQUMsQ0FBQztRQUNILE1BQU0sQ0FBQyxpQkFBVSxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7YUFDN0IsWUFBWSxFQUFFO2FBQ2Qsb0JBQW9CLEVBQUU7YUFDdEIsTUFBTSxDQUFDLE1BQU0sU0FBUyxJQUFJLENBQUMsQ0FBQyxDQUFDO0lBQ2xDLENBQUM7Q0FDRjtBQW5CRCxrQ0FtQkMifQ==
 });
 });
-FuseBox.pkg("johnny-five", {"chalk":"1.1.3"}, function(___scope___){
+FuseBox.pkg("johnny-five", {}, function(___scope___){
 ___scope___.file("lib/johnny-five.js", function(exports, require, module, __filename, __dirname){
 
 if (!Array.from || !Object.assign || !Map) {
@@ -33330,7 +33343,7 @@ exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
 });
 return ___scope___.entry = "index.js";
 });
-FuseBox.pkg("chalk@1.1.3", {}, function(___scope___){
+FuseBox.pkg("chalk", {}, function(___scope___){
 ___scope___.file("index.js", function(exports, require, module, __filename, __dirname){
 /* fuse:injection: */ var process = require("process");
 'use strict';
@@ -36907,7 +36920,7 @@ module.exports = {
 });
 return ___scope___.entry = "lib/serialport.js";
 });
-FuseBox.pkg("debug", {}, function(___scope___){
+FuseBox.pkg("debug", {"ms":"0.7.2"}, function(___scope___){
 ___scope___.file("src/browser.js", function(exports, require, module, __filename, __dirname){
 /* fuse:injection: */ var process = require("process");
 /**
@@ -37302,7 +37315,7 @@ function coerce(val) {
 });
 return ___scope___.entry = "src/browser.js";
 });
-FuseBox.pkg("ms", {}, function(___scope___){
+FuseBox.pkg("ms@0.7.2", {}, function(___scope___){
 ___scope___.file("index.js", function(exports, require, module, __filename, __dirname){
 
 /**

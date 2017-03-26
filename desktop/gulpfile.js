@@ -8,9 +8,17 @@ const electron = require('electron-connect')
 let fuseBox = new fsbx.FuseBox({
   homeDir: "src/",
   sourcemaps: true,
+  serverBundle: true,
   outFile: "./build/bundle.js",
   plugins: [
     fsbx.JSONPlugin(),
+    fsbx.TypeScriptHelpers(),
+    // sass
+    [
+      fsbx.SassPlugin({outputStyle: 'compressed'}),
+      fsbx.CSSResourcePlugin({inline: true}),
+      fsbx.CSSPlugin()
+    ],
     fsbx.BabelPlugin({
       config: {
         sourceMaps: true,
@@ -25,7 +33,7 @@ let fuseBox = new fsbx.FuseBox({
 });
 
 gulp.task("bundle", () => {
-  fuseBox.bundle('>**.ts*')
+  fuseBox.bundle('>renderer.ts*')
 });
 
 gulp.task('default', function () {

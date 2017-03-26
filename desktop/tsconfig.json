@@ -18,8 +18,8 @@
     "types": [
       "inferno"
     ],
+    "jsxFactory": "inferno_1.createElement",
     "jsx": "react",
-    "jsxFactory": "Inferno.createElement",
     "pretty": true,
     "stripInternal": true,
     "noEmitOnError": true,
