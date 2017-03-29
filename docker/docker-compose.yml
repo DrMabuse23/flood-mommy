@@ -1,0 +1,28 @@
+web:
+  build: ./app
+  volumes:
+    - "./app:/src/app"
+  ports:
+    - "3030:3000"
+  links:
+    - "rethinkdb"
+  command: nodemon -L app/bin/www
+
+nginx:
+  restart: always
+  build: ./nginx/
+  ports:
+    - "80:80"
+  volumes:
+    - /var/www/public
+  volumes_from:
+    - web
+  links:
+    - web:web
+
+rethinkdb:
+  image: rethinkdb:latest
+  command: rethinkdb --bind all
+  ports:
+    - "8888:8080"
+    - "28015:28015"
