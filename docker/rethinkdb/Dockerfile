@@ -1,1 +1,1 @@
-FROM modul8com/rethinkdb-armv7-rpi2:latest
+FROM dlecan/rethinkdb-raspbian-build:latest
