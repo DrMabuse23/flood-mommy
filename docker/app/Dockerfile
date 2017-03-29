@@ -1,6 +1,6 @@
 FROM hypriot/rpi-node:latest
 
-RUN sudo mkdir /src
+RUN mkdir /src
 
 RUN npm install nodemon -g
 
