@@ -1,6 +1,19 @@
 # flood-mommy 
 <!--[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Dependency Status][daviddm-image]][daviddm-url] [![Coverage percentage][coveralls-image]][coveralls-url]-->
+
+### Docker
+ > you need docker and docker-compose
+
+```
+cd docker
+docker compose up
+```
+
+open [Rethinkdb](http://localhost:8888)
+open [web](http://localhost:3030)
+
 <img src="https://cdn.rawgit.com/DrMabuse23/flood-mommy/master/src/assets/images/flower-girl.svg" style="display: flex; align-self: flex-end;width: 33%;margin-left: 66%;" />
+
 
 ## License
  © [DrMabuse]()
