@@ -1,4 +1,4 @@
-FROM node:latest
+FROM hypriot/rpi-node:latest
 
 RUN sudo mkdir /src
 
