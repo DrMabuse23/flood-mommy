@@ -21,6 +21,7 @@ nginx:
     - web:web
 
 rethinkdb:
+  build: ./rethinkdb/
   command: rethinkdb --bind all
   ports:
     - "8888:8080"
