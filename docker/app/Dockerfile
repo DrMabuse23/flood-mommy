@@ -1,6 +1,6 @@
 FROM node:latest
 
-RUN mkdir /src
+RUN sudo mkdir /src
 
 RUN npm install nodemon -g
 
