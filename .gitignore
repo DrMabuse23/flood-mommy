@@ -7,3 +7,4 @@ symbols.json
 /.vscode/symbols.json
 dist
 desktop/build/**/*.js
+*.DS_Store
